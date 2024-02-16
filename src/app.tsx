@@ -1,3 +1,4 @@
+import classNames from "classnames"
 import React, { useMemo, useState } from "react"
 import { Keyboard } from "./type"
 
@@ -11,6 +12,7 @@ export function App() {
     () => processKeyboardText(keyboardText),
     [keyboardText],
   )
+  let [pressedKeys, setPressedKeys] = useState<string[]>(() => [])
 
   return (
     <div>
@@ -23,7 +25,16 @@ export function App() {
           }}
         />
       </div>
-      <div>
+      <div
+        tabIndex={0}
+        onKeyDown={(ev) => {
+          setPressedKeys([...pressedKeys, ev.key.toLowerCase()])
+        }}
+        onKeyUp={(ev) => {
+          let key = ev.key.toLowerCase()
+          setPressedKeys(pressedKeys.filter((x) => x !== key))
+        }}
+      >
         <table className="keyboard">
           <tbody>
             {keyboard.map((row, k) => (
@@ -33,7 +44,14 @@ export function App() {
                     <tr>
                       <td className={`keyboard__key keyboard__offset--${k}`} />
                       {row.map((keycap, m) => (
-                        <td className="keyboard__key" key={m}>
+                        <td
+                          className={classNames("keyboard__key", {
+                            "keyboard__key--pressed": pressedKeys.includes(
+                              keycap.toLowerCase(),
+                            ),
+                          })}
+                          key={m}
+                        >
                           {keycap}
                         </td>
                       ))}
