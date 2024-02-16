@@ -21,3 +21,13 @@ html.dark {
     --foreground-color: #FFF;
     --background-color: #111;
 }
+
+.keyboard__key {
+    width: 18px;
+    border: solid 1px;
+    text-align: center;
+}
+
+.keyboard__offset--0 { width: 26px; }
+.keyboard__offset--1 { width: 34px; }
+.keyboard__offset--2 { width: 20px; }
