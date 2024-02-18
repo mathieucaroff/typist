@@ -15,7 +15,7 @@ Detect keypresses and highlight the pressed keys
 
 ## Goal 3
 
-Produce lessons in English adapted to the keyboard of the user
+Produce lessons adapted to the keyboard of the user
 
 ## Goal 4
 
@@ -23,7 +23,8 @@ Write down what the user types as they type it and track errors in its text
 
 ## Goal 5
 
-Produce lessons in French-without-accents
+Produce lessons in English and French-without-accents and custom dictionnary,
+but without accent.
 
 ## Goal 6
 
@@ -40,7 +41,7 @@ and produce lessons based off of it.
 
 ## Goal 9
 
-Add a mode which adds punctuations `*-=+;:,.!?'"/()[]` to the text.
+Add a mode which adds punctuations `;:,.!?'"/()[]` to the text.
 
 ## Goal 10
 
