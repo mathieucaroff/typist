@@ -39,8 +39,27 @@ html.dark {
 
 .typing {
     font-size: 150%;
+    white-space: pre-wrap;
 }
 .typing .label {
     font-size: 60%;
     margin-bottom: -5px;
+}
+
+.red {
+    color: #C00;
+}
+
+.blinkText {
+    animation-name: blinkText;
+    width:280px;
+    animation-duration:1s;
+    animation-iteration-count: Infinite;
+}
+
+@keyframes blinkText {
+    25% { color: black; }
+    45% { color: rgba(0, 0, 0, 0); }
+    55% { color: rgba(0, 0, 0, 0); }
+    75% { color: black; }
 }

@@ -15,6 +15,7 @@ export function Board(props: BoardProp) {
   let [lessonString, setLessonString] = useState("")
   let [pressedKeys, setPressedKeys] = useState<string[]>(() => [])
   let [typedText, setTypedText] = useState<string>("")
+  let [wrongTypedText, setWrongTypedText] = useState<string>("")
 
   useEffect(() => {
     setLessonString(
@@ -25,12 +26,22 @@ export function Board(props: BoardProp) {
 
   useEffect(() => {
     const handleKeyDown = (ev: KeyboardEvent) => {
+      if (ev.ctrlKey || ev.altKey || ev.metaKey) {
+        return
+      }
       let key = ev.key.toLowerCase()
       setPressedKeys([...pressedKeys, key])
+
+      let setText = wrongTypedText ? setWrongTypedText : setTypedText
+      let text = wrongTypedText || typedText
       if (key === "backspace") {
-        setTypedText(typedText.slice(0, -1))
+        setText(text.slice(0, -1))
       } else if (key.length === 1) {
-        setTypedText(typedText + key)
+        if (lessonString[typedText.length] !== key) {
+          setWrongTypedText((wrongTypedText + key).slice(0, 4))
+        } else {
+          setText(text + key)
+        }
       } else {
         console.log("unhandled keydown", key)
       }
@@ -57,7 +68,11 @@ export function Board(props: BoardProp) {
         <div className="label">the lesson</div>
         <div>{lessonString}</div>
         <div className="label">your input</div>
-        <div>{typedText}</div>
+        <div>
+          {typedText}
+          <span className="red">{wrongTypedText}</span>
+          <span className="blinkText">|</span>
+        </div>
       </div>
     </div>
   )
