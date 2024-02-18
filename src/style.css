@@ -36,3 +36,11 @@ html.dark {
 .keyboard__offset--0 { width: 26px; }
 .keyboard__offset--1 { width: 34px; }
 .keyboard__offset--2 { width: 20px; }
+
+.typing {
+    font-size: 150%;
+}
+.typing .label {
+    font-size: 60%;
+    margin-bottom: -5px;
+}
