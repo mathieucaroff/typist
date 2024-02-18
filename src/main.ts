@@ -24,7 +24,7 @@ async function main() {
   let cornerDiv = document.createElement("div")
   cornerDiv.innerHTML = githubCornerHTML(
     packageInfo.repository.url,
-    packageInfo.version,
+    packageInfo.version
   )
   document.body.appendChild(cornerDiv)
 
