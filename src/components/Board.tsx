@@ -5,12 +5,13 @@ import { KeyboardView } from "./Keyboard"
 
 export interface BoardProp {
   keyboard: Keyboard
+  dictionnary: string[]
   level: number
   length: number
 }
 
 export function Board(props: BoardProp) {
-  let { keyboard, level, length } = props
+  let { keyboard, dictionnary, level, length } = props
 
   let [lessonString, setLessonString] = useState("")
   let [pressedKeys, setPressedKeys] = useState<string[]>(() => [])
@@ -19,7 +20,9 @@ export function Board(props: BoardProp) {
 
   useEffect(() => {
     setLessonString(
-      keyboard.length <= 2 ? "" : lesson(keyboard, level, length).toLowerCase()
+      keyboard.length <= 2
+        ? ""
+        : lesson(keyboard, level, length, dictionnary, "equal").toLowerCase(),
     )
     setTypedText("")
   }, [keyboard, level, length])
