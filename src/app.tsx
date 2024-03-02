@@ -23,7 +23,7 @@ export function App() {
   let [dictionnary, setDictionnary] = useState<string[]>(() => [])
 
   return (
-    <div>
+    <>
       <LayoutSelector
         keyboardText={keyboardText}
         setKeyboardText={setKeyboardText}
@@ -59,6 +59,6 @@ export function App() {
           setLevel(level + 1)
         }}
       />
-    </div>
+    </>
   )
 }
