@@ -1,17 +1,18 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { Keyboard } from "../type"
 import { lesson } from "../lesson"
-import { KeyboardView } from "./Keyboard"
+import { KeyboardView } from "./KeyboardView"
 
 export interface BoardProp {
   keyboard: Keyboard
   dictionnary: string[]
   level: number
   length: number
+  increaseLevel: () => void
 }
 
 export function Board(props: BoardProp) {
-  let { keyboard, dictionnary, level, length } = props
+  let { keyboard, dictionnary, level, length, increaseLevel } = props
 
   let [lessonString, setLessonString] = useState("")
   let [pressedKeys, setPressedKeys] = useState<string[]>(() => [])
@@ -20,25 +21,34 @@ export function Board(props: BoardProp) {
 
   useEffect(() => {
     setLessonString(
-      keyboard.length <= 2
+      keyboard.keyArray.length <= 2
         ? ""
-        : lesson(keyboard, level, length, dictionnary, "equal").toLowerCase(),
+        : lesson(keyboard, level, length, dictionnary, "equal").toLowerCase()
     )
     setTypedText("")
-  }, [keyboard, level, length])
+  }, [keyboard.keyArray, level, length])
 
   useEffect(() => {
     const handleKeyDown = (ev: KeyboardEvent) => {
-      if (ev.ctrlKey || ev.altKey || ev.metaKey) {
+      let key = ev.key.toLowerCase()
+      if ((ev.ctrlKey && key !== "backspace") || ev.altKey || ev.metaKey) {
         return
       }
-      let key = ev.key.toLowerCase()
+
       setPressedKeys([...pressedKeys, key])
 
       let setText = wrongTypedText ? setWrongTypedText : setTypedText
       let text = wrongTypedText || typedText
-      if (key === "backspace") {
-        setText(text.slice(0, -1))
+      if (key === "enter") {
+        if (typedText === lessonString) {
+          increaseLevel()
+        }
+      } else if (key === "backspace") {
+        if (ev.ctrlKey) {
+          setText(text.replace(/\S+\s*$/, ""))
+        } else {
+          setText(text.slice(0, -1))
+        }
       } else if (key.length === 1) {
         if (lessonString[typedText.length] !== key) {
           setWrongTypedText((wrongTypedText + key).slice(0, 4))

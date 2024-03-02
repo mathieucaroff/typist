@@ -33,9 +33,22 @@ html.dark {
     background-color: #d0d0d0;
 }
 
-.keyboard__offset--0 { width: 26px; }
-.keyboard__offset--1 { width: 34px; }
-.keyboard__offset--2 { width: 20px; }
+.keyboard__miniText {
+    font-size: 8px;
+    padding-bottom: 10px;
+}
+
+.keyboard__offset--Basic--0 { width: 26px; }
+.keyboard__offset--Basic--1 { width: 34px; }
+.keyboard__offset--Basic--2 { width: 20px; }
+
+.keyboard__offset--TypeMatrix--0 { width: 20px; max-width: 20px; }
+.keyboard__offset--TypeMatrix--1 { width: 20px; max-width: 20px; border-bottom: 0; }
+.keyboard__offset--TypeMatrix--2 { width: 20px; max-width: 20px; border-top: 0; }
+
+.keyboard__centralKey--TypeMatrix--0 { width: 20px; max-width: 20px; }
+.keyboard__centralKey--TypeMatrix--1 { width: 20px; max-width: 20px; border-bottom: 0; }
+.keyboard__centralKey--TypeMatrix--2 { width: 20px; max-width: 20px; border-top: 0; }
 
 .typing {
     font-size: 150%;

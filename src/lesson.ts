@@ -17,7 +17,7 @@ export function lesson(
   level: number,
   length: number,
   baseDictionnary: string[],
-  frequency: "equal" | "dictionnary",
+  frequency: "equal" | "dictionnary"
 ): string {
   // Compute which letters should be used for the lesson
   let rowIndexAndStartArray = [
@@ -30,7 +30,7 @@ export function lesson(
   rowIndexAndStartArray.forEach(([rowIndex, start], k) => {
     let levelA = Math.min(level, 4 * (k + 1)) - 4 * k
     if (levelA > 0) {
-      let row = keyboard[rowIndex].slice(start)
+      let row = keyboard.keyArray[rowIndex].slice(start)
       letterString +=
         row.slice(4 - levelA, 4).join("") + row.slice(6, 6 + levelA).join("")
     }
@@ -39,7 +39,7 @@ export function lesson(
     letterString += rowIndexAndStartArray
       .slice(level - 16)
       .map(([rowIndex, start]) =>
-        keyboard[rowIndex].slice(4 + start, 6 + start),
+        keyboard.keyArray[rowIndex].slice(4 + start, 6 + start)
       )
       .join("")
   }

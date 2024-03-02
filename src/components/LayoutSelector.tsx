@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
+import { KeyboardKind } from "../type"
 
 const QWERTY = `
 QWERTYUIOP{}
@@ -19,10 +20,12 @@ ASETFHNIOR"|
 export interface LayoutSelectorProp {
   keyboardText: string
   setKeyboardText: Dispatch<SetStateAction<string>>
+  keyboardKind: KeyboardKind
+  setKeyboardKind: Dispatch<SetStateAction<KeyboardKind>>
 }
 
 export function LayoutSelector(prop: LayoutSelectorProp) {
-  let { keyboardText, setKeyboardText } = prop
+  let { keyboardText, setKeyboardText, keyboardKind, setKeyboardKind } = prop
 
   return (
     <>
@@ -30,14 +33,14 @@ export function LayoutSelector(prop: LayoutSelectorProp) {
       <div>
         <select
           onChange={(ev) => {
-            let key = ev.currentTarget.value.toUpperCase()
+            let name = ev.currentTarget.value.toUpperCase()
             setKeyboardText(
               {
                 QWERTY,
                 AZERTY,
                 ASSET2018,
                 OTHER: keyboardText,
-              }[key] ?? ""
+              }[name] ?? ""
             )
           }}
         >
@@ -45,6 +48,16 @@ export function LayoutSelector(prop: LayoutSelectorProp) {
           <option>Qwerty</option>
           <option>Azerty</option>
           <option>Asset2018</option>
+        </select>
+        <select
+          onChange={(ev) => {
+            let name = ev.currentTarget.value as KeyboardKind
+            setKeyboardKind(name)
+          }}
+          value={keyboardKind}
+        >
+          <option>Basic</option>
+          <option>TypeMatrix</option>
         </select>
       </div>
       <div>

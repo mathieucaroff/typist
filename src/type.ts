@@ -1,6 +1,11 @@
 export type Key = string
 
-export type Keyboard = Key[][]
+export type Keyboard = {
+  kind: KeyboardKind
+  keyArray: Key[][]
+}
+
+export type KeyboardKind = "Basic" | "TypeMatrix"
 
 export interface Position {
   x: number
